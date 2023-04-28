@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+		<flow name="cloudhub2-demo-apiFlow"
+		doc:id="059c131d-420e-42ea-9df7-484f5bcc742c">
+		<http:listener doc:name="Listener"
+			doc:id="78ac1bdd-fefd-4621-9aad-2e13d01a2181"
+			config-ref="HTTP_Listener_config" path="/api/demo" />
+		<logger level="INFO" doc:name="Start Logger"
+			doc:id="5181d7a1-e7f8-423c-b850-cd0988840d75"
+			message="Request Start Info Logger - #[message]" />
+		<ee:transform doc:name="Cloudhub version"
+			doc:id="2208d9cc-1c5c-4777-99a4-c92b9aad070e">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message": "Welcome Aniket to " ++ p('secure::cloudhub.version')
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="End Logger"
+			doc:id="11a75bff-7e72-422c-85e2-22fc64edede6"
+			message="Demo api logging end - #[message] and payload is #[payload]" />
+	</flow>
+</mule>

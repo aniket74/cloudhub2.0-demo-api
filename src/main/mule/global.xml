@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
+	<http:listener-config name="HTTP_Listener_config"
+		doc:name="HTTP Listener config"
+		doc:id="a5a17cee-fe7f-44c8-aafd-4621deeb77af">
+		<http:listener-connection host="0.0.0.0"
+			port="${http.port}" />
+	</http:listener-config>
+	<global-property doc:name="Global Property" doc:id="d4c6ab82-c5af-4f53-a2ec-8dd6d22c223d" name="env" value="local" />
+	<configuration-properties doc:name="Configuration properties" doc:id="f1b5acb8-9bbb-4cd9-a8af-b48d0b1d4628" file="properties/${env}.yaml" />
+	<global-property doc:name="Global Property" doc:id="2e3c29df-eb3c-4116-8c99-66d5c570a42e" name="encryptKey" value="${encryptKey}" />
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="d8d46bd7-71cd-4d5a-96e4-48e9d88a9508" file="properties/${env}.yaml" key="${encryptKey}" />	
+
+</mule>
