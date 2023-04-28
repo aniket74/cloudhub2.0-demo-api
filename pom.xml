@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mycompany</groupId>
-	<artifactId>cloudhub2.0-demo</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<artifactId>cloudhub2-demo</artifactId>
+	<version>1.0.0</version>
 	<packaging>mule-application</packaging>
 
-	<name>cloudhub2.0-demo</name>
+	<name>cloudhub2-demo</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,7 +18,7 @@
 		<anypoint.targetRegion>Cloudhub-US-East-2</anypoint.targetRegion>
 		<app.vcores>0.5</app.vcores>
 		<app.runtime>4.4.0</app.runtime>
-		<mule.maven.plugin.version>3.8.0</mule.maven.plugin.version>
+		<mule.maven.plugin.version>3.8.1</mule.maven.plugin.version>
 	</properties>
 
 	<build>
@@ -51,13 +51,20 @@
 						<properties>
 							<!--application level set key value properties-->
 							<http.port>8081</http.port>
-							<env>${env}</env> <!-- set these variables on command line -->
+							<env>${env}</env>
+							<!-- set these variables on command line -->
 						</properties>
 						<secureProperties>
 							<!--encrypt values before storing them-->
 							<amq.queue.pass>ajbfosneor</amq.queue.pass>
-							<encryptKey>${encryptKey}</encryptKey> <!-- set these variables on command line -->
+							<encryptKey>${encryptKey}</encryptKey>
+							<!-- set these variables on command line -->
 						</secureProperties>
+						<deploymentSettings>
+							<lastMileSecurity>false</lastMileSecurity>
+							<forwardSslSession>false</forwardSslSession>
+							<generateDefaultPublicUrl>true</generateDefaultPublicUrl>
+						</deploymentSettings>
 						<!-- deployment level settings-->
 						<integrations>
 							<services>
@@ -68,7 +75,7 @@
 						</integrations>
 
 					</cloudhub2Deployment>
-					<classifier>mule-application</classifier>
+					<classifier>---- select project type ----</classifier>
 					<!-- this must be present to mark it as a mule application e.g. set 
 					<classifier> as mule-application (default), mule-application-template, mule-application-example, or mule-policy.-->
 				</configuration>
@@ -79,7 +86,7 @@
 		<repository>
 			<id>anypoint-exchange-v3</id>
 			<!-- same server name mention in .m2 and cloudhub deployment plugin config-->
-			<name>Corporate Repository</name>
+			<name>Exchange Private Repository</name>
 			<url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${anypoint.organizationId}/maven</url>
 			<layout>default</layout>
 		</repository>
