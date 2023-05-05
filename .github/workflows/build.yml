@@ -43,7 +43,7 @@ jobs:
       - name: Step 2 - Echo out a GitHub Actions Secret to the logs
         run: |
           echo "The GitHub Action Secret will be masked for enckey and env: $ENV  "
-          echo "$ENCKEY" 
+          echo "$ENCRYPTKEY" 
           
       # setup JDK 1.8
       - name: Set up JDK 8
